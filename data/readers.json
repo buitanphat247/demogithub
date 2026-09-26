@@ -1,0 +1,62 @@
+[
+  {
+    "maDG": "DG01",
+    "hoTen": "Nguyen Van An",
+    "sdt": "0901234567",
+    "loaiThe": "VIP"
+  },
+  {
+    "maDG": "DG02",
+    "hoTen": "Tran Thi Binh",
+    "sdt": "0912345678",
+    "loaiThe": "Student"
+  },
+  {
+    "maDG": "DG03",
+    "hoTen": "Le Van Cuong",
+    "sdt": "0987654321",
+    "loaiThe": "Normal"
+  },
+  {
+    "maDG": "DG04",
+    "hoTen": "Pham Thi Dung",
+    "sdt": "0933445566",
+    "loaiThe": "VIP"
+  },
+  {
+    "maDG": "DG05",
+    "hoTen": "Hoang Van Em",
+    "sdt": "0944556677",
+    "loaiThe": "Student"
+  },
+  {
+    "maDG": "DG06",
+    "hoTen": "Doan Thi Giang",
+    "sdt": "0966778899",
+    "loaiThe": "Normal"
+  },
+  {
+    "maDG": "DG07",
+    "hoTen": "Vu Van Hai",
+    "sdt": "0977889900",
+    "loaiThe": "VIP"
+  },
+  {
+    "maDG": "DG08",
+    "hoTen": "Bui Thi Huong",
+    "sdt": "0922334455",
+    "loaiThe": "Student"
+  },
+  {
+    "maDG": "DG09",
+    "hoTen": "Nguyen Quoc Khanh",
+    "sdt": "0955667788",
+    "loaiThe": "Normal"
+  },
+  {
+    "maDG": "DG10",
+    "hoTen": "Le Thi Lan",
+    "sdt": "0911223344",
+    "loaiThe": "Student"
+  }
+]

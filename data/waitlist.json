@@ -1,0 +1,44 @@
+[
+  {
+    "maTL": "B02",
+    "maDG": "DG04",
+    "doUuTien": 3,
+    "thoiGian": "2026-09-18 08:30:00"
+  },
+  {
+    "maTL": "B02",
+    "maDG": "DG05",
+    "doUuTien": 2,
+    "thoiGian": "2026-09-18 09:15:00"
+  },
+  {
+    "maTL": "B02",
+    "maDG": "DG06",
+    "doUuTien": 1,
+    "thoiGian": "2026-09-18 10:00:00"
+  },
+  {
+    "maTL": "B05",
+    "maDG": "DG01",
+    "doUuTien": 3,
+    "thoiGian": "2026-09-19 14:20:00"
+  },
+  {
+    "maTL": "B05",
+    "maDG": "DG08",
+    "doUuTien": 2,
+    "thoiGian": "2026-09-19 15:45:00"
+  },
+  {
+    "maTL": "B09",
+    "maDG": "DG02",
+    "doUuTien": 2,
+    "thoiGian": "2026-09-20 07:50:00"
+  },
+  {
+    "maTL": "B09",
+    "maDG": "DG07",
+    "doUuTien": 3,
+    "thoiGian": "2026-09-20 08:10:00"
+  }
+]

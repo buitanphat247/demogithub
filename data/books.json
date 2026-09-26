@@ -1,0 +1,137 @@
+[
+  {
+    "maTL": "B01",
+    "tenTL": "Cau truc du lieu va Giai thuat",
+    "tacGia": "Nguyen Van A",
+    "theLoai": "CNTT",
+    "namXB": 2023,
+    "soLuong": 8,
+    "luotMuon": 145
+  },
+  {
+    "maTL": "B02",
+    "tenTL": "Lap trinh C++ Nang cao",
+    "tacGia": "Tran Van B",
+    "theLoai": "CNTT",
+    "namXB": 2022,
+    "soLuong": 3,
+    "luotMuon": 210
+  },
+  {
+    "maTL": "B03",
+    "tenTL": "Kinh te Vi mo ung dung",
+    "tacGia": "Le Thi C",
+    "theLoai": "KinhTe",
+    "namXB": 2021,
+    "soLuong": 10,
+    "luotMuon": 48
+  },
+  {
+    "maTL": "B04",
+    "tenTL": "Dac Nhan Tam",
+    "tacGia": "Dale Carnegie",
+    "theLoai": "KyNang",
+    "namXB": 2020,
+    "soLuong": 15,
+    "luotMuon": 320
+  },
+  {
+    "maTL": "B05",
+    "tenTL": "Tri tue Nhan tao co ban",
+    "tacGia": "Pham Van D",
+    "theLoai": "CNTT",
+    "namXB": 2024,
+    "soLuong": 5,
+    "luotMuon": 180
+  },
+  {
+    "maTL": "B06",
+    "tenTL": "Nguyen ly Ke toan tai chinh",
+    "tacGia": "Hoang Thi E",
+    "theLoai": "KinhTe",
+    "namXB": 2022,
+    "soLuong": 12,
+    "luotMuon": 35
+  },
+  {
+    "maTL": "B07",
+    "tenTL": "Nha Gia Kim",
+    "tacGia": "Paulo Coelho",
+    "theLoai": "VanHoc",
+    "namXB": 2019,
+    "soLuong": 20,
+    "luotMuon": 290
+  },
+  {
+    "maTL": "B08",
+    "tenTL": "Giai tich va Dai so tuyen tinh",
+    "tacGia": "Doan Van F",
+    "theLoai": "ToanHoc",
+    "namXB": 2021,
+    "soLuong": 7,
+    "luotMuon": 65
+  },
+  {
+    "maTL": "B09",
+    "tenTL": "Clean Code - Ma sach tinh gon",
+    "tacGia": "Robert C. Martin",
+    "theLoai": "CNTT",
+    "namXB": 2020,
+    "soLuong": 4,
+    "luotMuon": 265
+  },
+  {
+    "maTL": "B10",
+    "tenTL": "Tu duy Nhanh va Cham",
+    "tacGia": "Daniel Kahneman",
+    "theLoai": "KyNang",
+    "namXB": 2018,
+    "soLuong": 6,
+    "luotMuon": 195
+  },
+  {
+    "maTL": "B11",
+    "tenTL": "To Kill a Mockingbird",
+    "tacGia": "Harper Lee",
+    "theLoai": "VanHoc",
+    "namXB": 2017,
+    "soLuong": 12,
+    "luotMuon": 110
+  },
+  {
+    "maTL": "B12",
+    "tenTL": "Nhap mon Hoc May va Deep Learning",
+    "tacGia": "Vu Van G",
+    "theLoai": "CNTT",
+    "namXB": 2023,
+    "soLuong": 2,
+    "luotMuon": 175
+  },
+  {
+    "maTL": "B13",
+    "tenTL": "Marketing Can ban",
+    "tacGia": "Philip Kotler",
+    "theLoai": "KinhTe",
+    "namXB": 2022,
+    "soLuong": 9,
+    "luotMuon": 88
+  },
+  {
+    "maTL": "B14",
+    "tenTL": "Xac suat Thong ke ung dung",
+    "tacGia": "Bui Thi H",
+    "theLoai": "ToanHoc",
+    "namXB": 2021,
+    "soLuong": 14,
+    "luotMuon": 52
+  },
+  {
+    "maTL": "B15",
+    "tenTL": "Tieng Anh Chuyen nganh CNTT",
+    "tacGia": "Oxford University",
+    "theLoai": "NgoaiNgu",
+    "namXB": 2023,
+    "soLuong": 18,
+    "luotMuon": 130
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "maPhieu": "PM01",
+    "maDG": "DG01",
+    "maTL": "B01",
+    "ngayMuon": "2026-09-01",
+    "hanTra": "2026-09-15",
+    "trangThai": "DangMuon"
+  },
+  {
+    "maPhieu": "PM02",
+    "maDG": "DG02",
+    "maTL": "B04",
+    "ngayMuon": "2026-08-10",
+    "hanTra": "2026-08-25",
+    "trangThai": "DangMuon"
+  },
+  {
+    "maPhieu": "PM03",
+    "maDG": "DG03",
+    "maTL": "B02",
+    "ngayMuon": "2026-09-10",
+    "hanTra": "2026-09-24",
+    "trangThai": "DangMuon"
+  },
+  {
+    "maPhieu": "PM04",
+    "maDG": "DG04",
+    "maTL": "B03",
+    "ngayMuon": "2026-09-15",
+    "hanTra": "2026-09-30",
+    "trangThai": "DangMuon"
+  },
+  {
+    "maPhieu": "PM05",
+    "maDG": "DG05",
+    "maTL": "B05",
+    "ngayMuon": "2026-08-20",
+    "hanTra": "2026-09-05",
+    "trangThai": "DangMuon"
+  },
+  {
+    "maPhieu": "PM06",
+    "maDG": "DG06",
+    "maTL": "B07",
+    "ngayMuon": "2026-09-05",
+    "hanTra": "2026-09-19",
+    "trangThai": "DangMuon"
+  },
+  {
+    "maPhieu": "PM07",
+    "maDG": "DG07",
+    "maTL": "B09",
+    "ngayMuon": "2026-09-12",
+    "hanTra": "2026-09-26",
+    "trangThai": "DangMuon"
+  },
+  {
+    "maPhieu": "PM08",
+    "maDG": "DG08",
+    "maTL": "B10",
+    "ngayMuon": "2026-09-08",
+    "hanTra": "2026-09-22",
+    "trangThai": "DangMuon"
+  },
+  {
+    "maPhieu": "PM09",
+    "maDG": "DG01",
+    "maTL": "B12",
+    "ngayMuon": "2026-08-15",
+    "hanTra": "2026-08-30",
+    "trangThai": "DangMuon"
+  },
+  {
+    "maPhieu": "PM10",
+    "maDG": "DG02",
+    "maTL": "B06",
+    "ngayMuon": "2026-07-01",
+    "hanTra": "2026-07-15",
+    "trangThai": "DaTra"
+  },
+  {
+    "maPhieu": "PM11",
+    "maDG": "DG03",
+    "maTL": "B08",
+    "ngayMuon": "2026-07-10",
+    "hanTra": "2026-07-24",
+    "trangThai": "DaTra"
+  }
+]
