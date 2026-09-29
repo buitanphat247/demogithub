@@ -6,10 +6,18 @@
 #include "dsa_core/LibraryService.h"
 #include "presentation/Menu.h"
 
+// Thêm thư viện windows.h nếu đang chạy trên hệ điều hành Windows
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 using namespace std;
 
 int main() {
+    // Bật chế độ hỗ trợ hiển thị & nhập liệu Tiếng Việt UTF-8 cho Terminal Windows
 #ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
     system("cls");
 #else
     system("clear");
@@ -17,6 +25,7 @@ int main() {
 
     cout << "=========================================================\n";
     cout << " [KHOI DONG] Nap du lieu tu tang Persistence (data/*.json)...\n";
+
     
     vector<TaiLieu> dsSach = docDanhSachSach();
     vector<DocGia> dsDocGia = docDanhSachDocGia();

@@ -147,16 +147,34 @@ void chayMenu(LibraryService& service) {
                 break;
             }
             case 5: {
-                string tuKhoa;
-                cout << "\n--- [RQ3] TIM KIEM TAI LIEU THEO TEN / TU KHOA ---\n";
-                cout << "Nhap tu khoa ten sach: ";
-                cin.ignore();
-                getline(cin, tuKhoa);
-                vector<TaiLieu> ds = service.timTheoTen(tuKhoa);
-                cout << "\n[+] Ket qua tim kiem theo tu khoa [" << tuKhoa << "]:\n";
-                inBangSach(ds);
-                break;
-            }
+    cout << "\n--- [RQ3] TIM KIEM TAI LIEU THEO TEN / TU KHOA ---\n";
+    cout << "Nhap tu khoa ten sach: ";
+    
+    string tuKhoa;
+    // Bắt buộc dùng cin.ignore() nếu trước đó có nhập số để xóa bộ đệm '\n'
+    cin.ignore(1000, '\n'); 
+    getline(cin, tuKhoa);
+
+    // Gọi hàm tìm kiếm từ service
+    vector<TaiLieu> ketQua = service.timTheoTen(tuKhoa);
+
+    cout << "\n[+] Ket qua tim kiem theo tu khoa [" << tuKhoa << "]:\n\n";
+
+    if (ketQua.empty()) {
+        cout << "  [!] Khong tim thay tai lieu nao phu hop.\n";
+    } else {
+        // In danh sách tìm thấy ra màn hình
+        for (const auto& sach : ketQua) {
+            cout << "  - [" << sach.maTL << "] " << sach.tenTL 
+                 << " | The loai: " << sach.theLoai 
+                 << " | Luot muon: " << sach.luotMuon << "\n";
+        }
+    }
+    
+    cout << "\n(Nhan Enter de tiep tuc...)";
+    cin.get();
+    break;
+}
             case 6: {
                 cout << "\n--- TOAN BO DANH MUC TAI LIEU TRONG KHO ---\n";
                 inBangSach(service.layTatCaSach());

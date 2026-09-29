@@ -11,8 +11,77 @@
 #include <vector>
 #include <algorithm>
 #include <limits>
+#include <cctype>
 
 using namespace std;
+// ============================================================
+//0. HÀM HỖ TRỢ CHUẨN HÓA CHUỖI (loại bỏ dấu tiếng Việt, chuyển về chữ thường)
+// ============================================================
+std::string BoDauVaVietThuong(const std::string& str) {
+    std::string res = "";
+    for (size_t i = 0; i < str.length(); ) {
+        unsigned char c = str[i];
+
+        // Ký tự ASCII chuẩn (a-z, A-Z, 0-9...)
+        if (c < 128) {
+            res += (char)std::tolower(c);
+            i++;
+        } 
+        // Ký tự UTF-8 2 bytes (Các chữ cái Tiếng Việt có dấu phổ biến)
+        else if ((c & 0xE0) == 0xC0 && i + 1 < str.length()) {
+            unsigned char c2 = str[i + 1];
+            
+            // Nhóm chữ A (à á ả ã ạ â ấ ầ ẩ ẫ ậ ă ắ ằ ẳ ẵ ặ...)
+            if ((c == 0xC3 && (c2 >= 0x80 && c2 <= 0x85)) || 
+                (c == 0xC3 && (c2 >= 0xA0 && c2 <= 0xA5)) ||
+                (c == 0xC4 && (c2 >= 0x80 && c2 <= 0x83))) {
+                res += 'a';
+            }
+            // Nhóm chữ E (è é ẻ ẽ ẹ ê ế ề ể ễ ệ...)
+            else if ((c == 0xC3 && (c2 >= 0x88 && c2 <= 0x8B)) || 
+                     (c == 0xC3 && (c2 >= 0xA8 && c2 <= 0xAB)) ||
+                     (c == 0xC3 && c2 == 0xAA)) {
+                res += 'e';
+            }
+            // Nhóm chữ I (ì í ỉ ĩ ị...)
+            else if ((c == 0xC3 && (c2 >= 0x8C && c2 <= 0x8D)) || 
+                     (c == 0xC3 && (c2 >= 0xAC && c2 <= 0xAD))) {
+                res += 'i';
+            }
+            // Nhóm chữ O (ò ó ỏ õ ọ ô ố ồ ổ ỗ ộ ơ ớ ờ ở ỡ ợ...)
+            else if ((c == 0xC3 && (c2 >= 0x92 && c2 <= 0x96)) || 
+                     (c == 0xC3 && (c2 >= 0xB2 && c2 <= 0xB6)) ||
+                     (c == 0xC3 && c2 == 0xB4) || (c == 0xC6 && c2 == 0xA1)) {
+                res += 'o';
+            }
+            // Nhóm chữ U (ù ú ủ ũ ụ ư ứ ừ ử ữ ự...)
+            else if ((c == 0xC3 && (c2 >= 0x99 && c2 <= 0x9C)) || 
+                     (c == 0xC3 && (c2 >= 0xB9 && c2 <= 0xBC)) ||
+                     (c == 0xC6 && c2 == 0xB0)) {
+                res += 'u';
+            }
+            // Nhóm chữ Y (ỳ ý ỷ ỹ ỵ...)
+            else if ((c == 0xC3 && c2 == 0xBD) || (c == 0xC3 && c2 == 0xDD)) {
+                res += 'y';
+            }
+            // Nhóm chữ Đ (Đ / đ)
+            else if ((c == 0xC4 && (c2 == 0x90 || c2 == 0x91))) {
+                res += 'd';
+            }
+            else {
+                res += (char)std::tolower(c);
+            }
+            i += 2;
+        } 
+        // Ký tự UTF-8 3 bytes (Ví dụ các dấu ghép tổ hợp)
+        else if ((c & 0xF0) == 0xE0 && i + 2 < str.length()) {
+            i += 3;
+        } else {
+            i++;
+        }
+    }
+    return res;
+}
 
 // ============================================================
 // 1. CẤU TRÚC DỮ LIỆU BẢN GHI TÀI LIỆU
@@ -282,22 +351,31 @@ public:
 
     // RQ3
     vector<TaiLieu*> RQ3_TimTheoTen(const string& tuKhoa) const {
-        vector<TaiLieu*> ketQua;
-        string tuKhoaThuong = ChuoiThuong(tuKhoa);
+    vector<TaiLieu*> ketQua;
 
-        vector<vector<TaiLieu*>*> tatCaNhom =
-            const_cast<BangBamTheLoai&>(bangBamTheLoai).LayTatCaNhom();
+    // Chuẩn hóa từ khóa người dùng nhập (ví dụ: "Cơ sở" -> "co so")
+    string tuKhoaChuAn = BoDauVaVietThuong(tuKhoa);
 
-        for (vector<TaiLieu*>* nhom : tatCaNhom) {
-            for (TaiLieu* tl : *nhom) {
-                string tenThuong = ChuoiThuong(tl->tenTaiLieu);
-                if (tenThuong.find(tuKhoaThuong) != string::npos) {
-                    ketQua.push_back(tl);
-                }
+    vector<vector<TaiLieu*>*> tatCaNhom =
+        const_cast<BangBamTheLoai&>(bangBamTheLoai).LayTatCaNhom();
+
+    for (vector<TaiLieu*>* nhom : tatCaNhom) {
+        if (!nhom) continue; // Kiểm tra con trỏ an toàn
+
+        for (TaiLieu* tl : *nhom) {
+            if (!tl) continue; // Kiểm tra con trỏ an toàn
+
+            // Chuẩn hóa tên tài liệu từ CSDL (ví dụ: "Cơ sở dữ liệu" -> "co so du lieu")
+            string tenTaiLieuChuAn = BoDauVaVietThuong(tl->tenTaiLieu);
+
+            // Tìm kiếm từ khóa chuẩn hóa trong tên tài liệu chuẩn hóa
+            if (tenTaiLieuChuAn.find(tuKhoaChuAn) != string::npos) {
+                ketQua.push_back(tl);
             }
         }
-        return ketQua;
     }
+    return ketQua;
+}
 
     int TongSoTaiLieu() const { return bangBamMa.SoPhanTu(); }
 };
