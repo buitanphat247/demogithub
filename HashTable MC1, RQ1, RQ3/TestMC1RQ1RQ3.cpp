@@ -1,11 +1,3 @@
-/*
-    PHỤ TRÁCH: BẢNG BĂM (MC1, RQ1, RQ3)
-    ------------------------------------
-    - MC1: Tra cứu chính xác tài liệu theo MÃ TÀI LIỆU
-    - RQ1: Tra cứu tài liệu theo THỂ LOẠI
-    - RQ3: Tra cứu / tìm kiếm tài liệu theo TÊN SÁCH (hoặc từ khóa gần đúng)
-*/
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -385,7 +377,7 @@ public:
 // ============================================================
 void InTaiLieu(const TaiLieu* tl) {
     if (tl == nullptr) {
-        cout << "  -> Khong tim thay tai lieu phù hop.\n";
+        cout << "  -> Khong tim thay tai lieu phu hop.\n";
         return;
     }
     cout << "  [" << tl->maTaiLieu << "] " << tl->tenTaiLieu
@@ -420,10 +412,10 @@ int main() {
         cout << "      HE THONG QUAN LY THU VIEN\n";
         cout << "=========================================\n";
         cout << "1. Them tai lieu moi\n";
-        cout << "2. [MC1] Tra cuu chinh xac theo MA TAI LIETU\n";
+        cout << "2. [MC1] Tra cuu chinh xac theo MA TAI LIEU\n";
         cout << "3. [RQ1] Tra cuu danh sach theo THE LOAI\n";
-        cout << "4. [RQ3] Tim kiem theo TEN TAI LIETU (hoac tu khoa)\n";
-        cout << "5. Thong ke tong so tai lieu\n";
+        cout << "4. [RQ3] Tim kiem theo TEN TAI LIEU (hoac tu khoa)\n";
+        cout << "5. THONG KE tong so tai lieu\n";
         cout << "0. Thoat\n";
         cout << "-----------------------------------------\n";
         cout << "Nhap lua chon cua ban: ";
@@ -436,7 +428,7 @@ int main() {
             string ma, ten, tacGia, theLoai, tinhTrang;
             int nam, soLuong;
 
-            cout << "\n--- THEM TAI LIETU MOI ---\n";
+            cout << "\n--- THEM TAI LIEU MOI ---\n";
             cout << "Nhap ma tai lieu: "; getline(cin, ma);
             cout << "Nhap ten tai lieu: "; getline(cin, ten);
             cout << "Nhap tac gia: "; getline(cin, tacGia);
