@@ -1,0 +1,11 @@
+# Bỏ qua các file biên dịch nhị phân
+*.exe
+*.o
+*.obj
+
+# Bỏ qua các file chạy tạm và file cấu hình IDE/VS Code
+tempCodeRunnerFile*
+.vscode/
+
+# Thư mục build (nếu có)
+build/
