@@ -133,5 +133,95 @@
     "namXB": 2023,
     "soLuong": 18,
     "luotMuon": 130
+  },
+  {
+    "maTL": "B16",
+    "tenTL": "Thiet ke va Phuong phap Lap trinh C++",
+    "tacGia": "Bjarne Stroustrup",
+    "theLoai": "CNTT",
+    "namXB": 2022,
+    "soLuong": 5,
+    "luotMuon": 225
+  },
+  {
+    "maTL": "B17",
+    "tenTL": "Quan tri Hoc va Ky nang Lanh dao",
+    "tacGia": "Peter Drucker",
+    "theLoai": "KinhTe",
+    "namXB": 2020,
+    "soLuong": 8,
+    "luotMuon": 115
+  },
+  {
+    "maTL": "B18",
+    "tenTL": "Toan Roi rac cho Khoa hoc May tinh",
+    "tacGia": "Nguyen Duc I",
+    "theLoai": "ToanHoc",
+    "namXB": 2023,
+    "soLuong": 11,
+    "luotMuon": 78
+  },
+  {
+    "maTL": "B19",
+    "tenTL": "Tu Duy Lập Trình va Thuat Toan Tối Ưu",
+    "tacGia": "Thomas H. Cormen",
+    "theLoai": "CNTT",
+    "namXB": 2021,
+    "soLuong": 6,
+    "luotMuon": 198
+  },
+  {
+    "maTL": "B20",
+    "tenTL": "Rung Na Uy",
+    "tacGia": "Haruki Murakami",
+    "theLoai": "VanHoc",
+    "namXB": 2018,
+    "soLuong": 14,
+    "luotMuon": 310
+  },
+  {
+    "maTL": "B21",
+    "tenTL": "Thay Doi Thoi Quen Rung Dong Cuoc Doi",
+    "tacGia": "James Clear",
+    "theLoai": "KyNang",
+    "namXB": 2022,
+    "soLuong": 16,
+    "luotMuon": 285
+  },
+  {
+    "maTL": "B22",
+    "tenTL": "He Quan tri Co so Du lieu va SQL",
+    "tacGia": "Trinh Van K",
+    "theLoai": "CNTT",
+    "namXB": 2023,
+    "soLuong": 9,
+    "luotMuon": 160
+  },
+  {
+    "maTL": "B23",
+    "tenTL": "Tien Te va Ngat Hang Chuyen Sau",
+    "tacGia": "Frederic Mishkin",
+    "theLoai": "KinhTe",
+    "namXB": 2021,
+    "soLuong": 7,
+    "luotMuon": 62
+  },
+  {
+    "maTL": "B24",
+    "tenTL": "Tieng Anh Giao tiep Thuong mai",
+    "tacGia": "Cambridge Press",
+    "theLoai": "NgoaiNgu",
+    "namXB": 2024,
+    "soLuong": 12,
+    "luotMuon": 140
+  },
+  {
+    "maTL": "B25",
+    "tenTL": "Kien truc May tinh va He dieu hanh",
+    "tacGia": "Andrew S. Tanenbaum",
+    "theLoai": "CNTT",
+    "namXB": 2020,
+    "soLuong": 4,
+    "luotMuon": 172
   }
 ]
