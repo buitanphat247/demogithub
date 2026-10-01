@@ -9,7 +9,7 @@ Struct phụ: chứa các dữ liệu hỗ trợ sắp xếp độ ưu tiên tro
 hangCho và lưu các dữ liệu cần hiển thị trong một danh sách
 hàng chờ ở đầu ra
 */
-struct DSHangCho{
+struct DGChoMuon{
     string maDG;
     string hoTen;
     string sdt;
@@ -17,7 +17,7 @@ struct DSHangCho{
     string thoiGian;
     int doUuTien;       // Độ ưu tiên theo thời gian trong một ngày
 
-    int doUuTienThe() {
+    int doUuTienThe() const {
         if (loaiThe == "VIP") return 1;
         else if (loaiThe == "Student") return 2;
         else return 3;
@@ -27,20 +27,20 @@ struct DSHangCho{
 class PriorityQueue
 {
 private:
-    WaitlistEntry* hangCho;
+    DGChoMuon* hangCho;
     int capacity;
     int size;
     int front;
     int rear;
 
     void resize();
-    bool uuTienHon(const DSHangCho& a, const DSHangCho& b) const;
+    bool uuTienHon(const DGChoMuon& dg1, const DGChoMuon& dg2) const;
 
 public:
     PriorityQueue(int first_capacity = 300000);
     ~PriorityQueue();
 
-    void EnQueue(WaitlistEntry* &hangCho);
+    void EnQueue(DGChoMuon &dg);
     void hienThi() const;
 };
 
