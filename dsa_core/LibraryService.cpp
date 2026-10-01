@@ -11,6 +11,7 @@ void LibraryService::napDuLieu(const vector<TaiLieu>& s, const vector<DocGia>& d
     dsSach = s;
     dsDocGia = dg;
     dsPhieuMuon = pm;
+    dsChoMuon = dscm;
 }
 
 // [MC1] Tra cuu tai lieu theo ma (Linear Search)
