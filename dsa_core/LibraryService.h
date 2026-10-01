@@ -10,15 +10,16 @@ using namespace std;
 // Class xu ly nghiep vu va thuat toan quan ly thu vien
 class LibraryService {
 private:
-    vector<TaiLieu> dsSach;        // Danh sach tai lieu
-    vector<DocGia> dsDocGia;       // Danh sach doc gia
-    vector<PhieuMuon> dsPhieuMuon; // Danh sach phieu muon
-
+    vector<TaiLieu> dsSach;         // Danh sach tai lieu
+    vector<DocGia> dsDocGia;        // Danh sach doc gia
+    vector<PhieuMuon> dsPhieuMuon;  // Danh sach phieu muon
+    vector<WaitlistEntry> dsChoMuon;// Danh sach cho muon
 public:
     LibraryService();
 
     // Nap du lieu ban dau vao he thong
-    void napDuLieu(const vector<TaiLieu>& s, const vector<DocGia>& dg, const vector<PhieuMuon>& pm);
+    void napDuLieu(const vector<TaiLieu>& s, const vector<DocGia>& dg,
+        const vector<PhieuMuon>& pm, const vector<WaitlistEntry> dscm);
 
     // [MC1] Tim kiem tai lieu theo ma (tim kiem tuyen tinh)
     TaiLieu* timTheoMa(const string& ma);
@@ -37,6 +38,8 @@ public:
 
     // Lay toan bo danh sach sach hien co
     vector<TaiLieu> layTatCaSach() const;
+
+    // Lay danh sach doc gia cho muon tai lieu theo ma tai lieu
 };
 
 #endif // LIBRARYSERVICE_H

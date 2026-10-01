@@ -7,8 +7,17 @@ PriorityQueue::PriorityQueue(int first_capacity = 300000) {
     capacity = first_capacity;
     hangCho = new DGChoMuon[capacity];
     size = 0;
-    front = 0;
-    rear = -1;
+}
+
+// Sao chep hang doi
+PriorityQueue::PriorityQueue(const PriorityQueue& tmp) {
+    this->capacity = tmp.capacity;
+    this->size = tmp.size;
+
+    this->hangCho = new DGChoMuon[this->capacity];
+    for (int i = 0; i < this->size; i++) {
+        this->hangCho[i] = tmp.hangCho[i];
+    }
 }
 
 PriorityQueue::~PriorityQueue() {
@@ -25,6 +34,7 @@ void PriorityQueue::resize() {
     hangCho = tmp;
 }
 
+// So sánh thứ tự ưu tiên của hai độc giả 
 bool PriorityQueue::uuTienHon(const DGChoMuon& dg1, const DGChoMuon& dg2) const {
     int loaiThe_dg1 = dg1.doUuTienThe();
     int loaiThe_dg2 = dg2.doUuTienThe();
@@ -48,32 +58,99 @@ bool PriorityQueue::uuTienHon(const DGChoMuon& dg1, const DGChoMuon& dg2) const 
     }
 }
 
+// Di chuyen phan tu len tren neu uu tien hon cha
+void PriorityQueue::heapifyUp(int idx) {
+    while (idx > 0) {
+        int cha = (idx - 1)/2;
+
+        if (uuTienHon(hangCho[idx], hangCho[cha])) {
+            DGChoMuon tmp = hangCho[idx];
+            hangCho[idx] = hangCho[cha];
+            hangCho[cha] = tmp;
+
+            idx = cha;
+        }
+        else break;
+    }
+}
+
+void PriorityQueue::heapifyDown(int idx) {
+    while (true) {
+        int left = 2 * idx + 1;
+        int right = 2 * idx + 1;
+        int cha = idx;
+
+        if (left < size && uuTienHon(hangCho[left], hangCho[cha])) {
+            cha = left;
+        }
+        if (right < size && uuTienHon(hangCho[right], hangCho[cha])) {
+            cha = right;
+        }
+
+        if (cha != idx) {
+            DGChoMuon tmp = hangCho[idx];
+            hangCho[idx] = hangCho[cha];
+            hangCho[cha] = tmp;
+
+            idx = cha;
+        }
+        else break;
+    }
+}
+
+// Thêm 1 độc giả vào hàng đợi
 void PriorityQueue::EnQueue(DGChoMuon &dg) {
     if (size == capacity) {
         resize();
     }
-    else {
-        int i = size - 1;
-        while (i >= 0 && uuTienHon(dg, hangCho[i])) {
-            hangCho[i+1] = hangCho[i];
-            i--;
-        }
-        hangCho[i+1] = dg;
-        size++;
-    }
+    hangCho[size] = dg;
+    heapifyUp(size);
+    size++;
 }
 
+DGChoMuon PriorityQueue::DeQueue() {
+    if (isEmpty()) {
+        throw runtime_error("Hang cho dang rong!");
+    }
+
+    DGChoMuon goc = hangCho[0];
+    hangCho[0] = hangCho[size-1];
+    size--;
+
+    if (size > 0) {
+        heapifyDown(0);
+    }
+    return goc;
+}
+
+bool PriorityQueue::isEmpty() const{
+    return (size == 0);
+}
+
+int PriorityQueue::getSize() {
+    return size;
+}
+
+// In danh sách chờ mượn ra màn hình
 void PriorityQueue::hienThi() const {
+    if (isEmpty()) {
+        cout << "Hang cho rong!\n";
+        return;
+    }
+
+    PriorityQueue tmp = *this;
     cout << "=====================================================================\n";
     cout << "STT\tMa Doc Gia\tHo Va Ten\tSo Dien Thoai\tLoai The\tThoi Gian\n";
     cout << "=====================================================================\n";
-    for (int i = size-1; i >= 0; i--) {
-        cout << size-i << "\t"
-             << hangCho[i].maDG << "\t"
-             << hangCho[i].hoTen << "\t"
-             << hangCho[i].sdt << "\t"
-             << hangCho[i].loaiThe << "\t"
-             << hangCho[i].thoiGian << "\n";
+    int stt = 1;
+    while (!tmp.isEmpty()) {
+        DGChoMuon dg = tmp.DeQueue();
+        cout << stt << "\t"
+             << dg.maDG << "\t"
+             << dg.hoTen << "\t"
+             << dg.sdt << "\t"
+             << dg.loaiThe << "\t"
+             << dg.thoiGian << "\n";
     }
     cout << "=====================================================================\n";
 }
