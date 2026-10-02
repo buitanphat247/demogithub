@@ -18,10 +18,11 @@ int main() {
     vector<TaiLieu> dsSach    = docDanhSachSach();
     vector<DocGia> dsDocGia   = docDanhSachDocGia();
     vector<PhieuMuon> dsPhieu = docDanhSachPhieu();
+    vector<WaitlistEntry> dsChoMuon = docDanhSachHangCho();
 
     // Bước 2: Nạp dữ liệu vào Service
     LibraryService service;
-    service.napDuLieu(dsSach, dsDocGia, dsPhieu);
+    service.napDuLieu(dsSach, dsDocGia, dsPhieu, dsChoMuon);
 
     cout << " [SAN SANG] Da nap " << dsSach.size() << " sach, "
          << dsDocGia.size() << " doc gia, "
@@ -30,6 +31,11 @@ int main() {
 
     // Bước 3: Chạy vòng lặp Menu tương tác
     chayMenu(service);
+
+    // Bước 4: Lưu dữ liệu vào các tệp JSON
+    cout << " [LUU DU LIEU] Luu du lieu vao tang Persistence (data/*.json)...\n";
+    cout << "=========================================================\n";
+
 
     return 0;
 }

@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "../models/Models.h"
+#include "PriorityQueue.h"
 
 using namespace std;
 
@@ -39,7 +40,10 @@ public:
     // Lay toan bo danh sach sach hien co
     vector<TaiLieu> layTatCaSach() const;
 
+    //Ham phu: tim doc gia theo maDG
+    DocGia* LibraryService::timDocGiaTheoMa(const string& maDG);
     // Lay danh sach doc gia cho muon tai lieu theo ma tai lieu
+    vector<DGChoMuon> layDanhSachChoTheoMaTL(const string& maTL);
 };
 
 #endif // LIBRARYSERVICE_H

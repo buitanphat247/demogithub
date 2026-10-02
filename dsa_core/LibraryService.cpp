@@ -97,3 +97,67 @@ vector<TaiLieu> LibraryService::timTheoTen(const string& tuKhoa) {
 vector<TaiLieu> LibraryService::layTatCaSach() const {
     return dsSach;
 }
+
+// Ham phu tim doc gia theo maDG
+DocGia* LibraryService::timDocGiaTheoMa(const string& maDG) {
+    for (size_t i = 0; i < dsDocGia.size(); i++) {
+        if (dsDocGia[i].maDG == maDG) {
+            return &dsDocGia[i];
+        }
+    }
+    return nullptr;
+}
+
+// Hàm so sánh tiêu chí ưu tiên theo thuật toán thông thường
+static bool soSanhUuTien(const DGChoMuon& dg1, const DGChoMuon& dg2) {
+    int loaiThe1 = dg1.doUuTienThe();
+    int loaiThe2 = dg2.doUuTienThe();
+    if (loaiThe1 != loaiThe2) {
+        return loaiThe1 < loaiThe2;
+    }
+
+    string ngay1 = dg1.thoiGian.substr(0, 10);
+    string ngay2 = dg2.thoiGian.substr(0, 10);
+    if (ngay1 == ngay2) {
+        return dg1.doUuTien < dg2.doUuTien;
+    }
+    return ngay1 < ngay2;
+}
+
+// Lay danh sach doc gia cho muon tai lieu theo ma tai lieu
+vector<DGChoMuon> LibraryService::layDanhSachChoTheoMaTL(const string& maTL) {
+    vector<DGChoMuon> ketQua;
+
+    // Duyet tuyen tinh loc danh sach va lay du lieu tu dsDocGia
+    for (const auto& entry : dsChoMuon) {
+        if (entry.maTL == maTL) {
+            const DocGia* reader = timDocGiaTheoMa(entry.maDG);
+
+            if (reader != nullptr) {
+                DGChoMuon dg;
+                dg.maDG = reader->maDG;
+                dg.hoTen = reader->hoTen;
+                dg.sdt = reader->sdt;
+                dg.loaiThe = reader->loaiThe;
+                dg.thoiGian = entry.thoiGian;
+                dg.doUuTien = entry.doUuTien;
+                ketQua.push_back(dg);
+            }
+        }
+    }
+
+    // Sap xep ket qua bang Selection Sort 
+    for (size_t i = 0; i < ketQua.size(); i++) {
+        size_t minIdx = i;
+        for (size_t j = i + 1; j < ketQua.size(); j++) {
+            if (soSanhUuTien(ketQua[j], ketQua[minIdx])) {
+                minIdx = j;
+            }
+        }
+        if (minIdx != i) {
+            swap(ketQua[i], ketQua[minIdx]);
+        }
+    }
+
+    return ketQua;
+}
