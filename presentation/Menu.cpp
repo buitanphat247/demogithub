@@ -181,7 +181,7 @@ void chayMenu(LibraryService& service) {
                 break;
             }
             case 0: {
-                cout << "\n>> Dang dong chuong trinh. Tam biet!\n";
+                cout << "\n>> Da dong chuong trinh. Tam biet!\n";
                 break;
             }
             default: {
