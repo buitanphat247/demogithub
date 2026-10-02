@@ -1,9 +1,10 @@
 #include "PriorityQueue.h"
 #include <iostream>
 #include <string>
+#include <iomanip>
 using namespace std;
 
-PriorityQueue::PriorityQueue(int first_capacity = 300000) {
+PriorityQueue::PriorityQueue(int first_capacity) {
     capacity = first_capacity;
     hangCho = new DGChoMuon[capacity];
     size = 0;
@@ -34,15 +35,15 @@ void PriorityQueue::resize() {
     hangCho = tmp;
 }
 
-// So sánh thứ tự ưu tiên của hai độc giả 
+// So sanh thu tu uu tien cua hai doc gia
 bool PriorityQueue::uuTienHon(const DGChoMuon& dg1, const DGChoMuon& dg2) const {
     int loaiThe_dg1 = dg1.doUuTienThe();
     int loaiThe_dg2 = dg2.doUuTienThe();
-    /*Xét độ ưu tiên:
-    + Xếp theo loại thẻ: VIP > Student > Normal
-    + Nếu cùng loại thẻ thì ưu tiên ngày đăng ký sớm hơn
-    + Nếu cùng loại thẻ và cùng ngày đăng ký thì ưu tiên
-    đọc giả có độ ưu tiên nhỏ hơn*/
+    /*Xet do uu tien:
+    + Xep theo loai the: VIP > Student > Normal
+    + Neu cung loai the thi uu tien ngay dang ky som hon
+    + Neu cung loai the va cung ngay thi uu tien doc gia
+    co do uu tien nho hon*/
     if (loaiThe_dg1 != loaiThe_dg2) {
         return (loaiThe_dg1 < loaiThe_dg2);
     }
@@ -74,6 +75,7 @@ void PriorityQueue::heapifyUp(int idx) {
     }
 }
 
+// Di chuyen phan tu xuong duoi neu cha uu tien hon
 void PriorityQueue::heapifyDown(int idx) {
     while (true) {
         int left = 2 * idx + 1;
@@ -108,6 +110,7 @@ void PriorityQueue::EnQueue(DGChoMuon &dg) {
     size++;
 }
 
+// Lay phan tu goc (cha) va xoa phan tu do ra khoi hang doi
 DGChoMuon PriorityQueue::DeQueue() {
     if (isEmpty()) {
         throw runtime_error("Hang cho dang rong!");
@@ -131,7 +134,7 @@ int PriorityQueue::getSize() {
     return size;
 }
 
-// In danh sách chờ mượn ra màn hình
+// In danh sach cho muon ra man hinh
 void PriorityQueue::hienThi() const {
     if (isEmpty()) {
         cout << "Hang cho rong!\n";
@@ -139,18 +142,29 @@ void PriorityQueue::hienThi() const {
     }
 
     PriorityQueue tmp = *this;
-    cout << "=====================================================================\n";
-    cout << "STT\tMa Doc Gia\tHo Va Ten\tSo Dien Thoai\tLoai The\tThoi Gian\n";
-    cout << "=====================================================================\n";
+    cout << string(100, '=') << endl;
+
+    // 1. IN TIÊU ĐỀ CÁC CỘT (Căn trái và cố định kích thước từng cột)
+    cout << left 
+         << setw(6)  << "STT"
+         << setw(12) << "Ma Doc Gia"
+         << setw(20) << "Ho Va Ten"
+         << setw(15) << "So Dien Thoai"
+         << setw(12) << "Loai The"
+         << setw(20) << "Thoi Gian" << endl;
+    cout << string(100, '=') << endl;
+
     int stt = 1;
     while (!tmp.isEmpty()) {
         DGChoMuon dg = tmp.DeQueue();
-        cout << stt << "\t"
-             << dg.maDG << "\t"
-             << dg.hoTen << "\t"
-             << dg.sdt << "\t"
-             << dg.loaiThe << "\t"
-             << dg.thoiGian << "\n";
+
+        cout << left 
+             << setw(6)  << stt++               
+             << setw(12) << dg.maDG
+             << setw(20) << dg.hoTen
+             << setw(15) << dg.sdt
+             << setw(12) << dg.loaiThe
+             << setw(20) << dg.thoiGian << endl;
     }
-    cout << "=====================================================================\n";
+    cout << string(100, '=') << endl;
 }

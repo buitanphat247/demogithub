@@ -6,17 +6,17 @@
 #include "../models/Models.h"
 
 /*
-Struct phụ: chứa các dữ liệu hỗ trợ sắp xếp độ ưu tiên trong
-hangCho và lưu các dữ liệu cần hiển thị trong một danh sách
-hàng chờ ở đầu ra
+Struct phu: chua cac du lieu ho tro sap xep do uu tien trong
+hangCho va cac du lieu can hien thi trong danh sach hang cho
+o dau ra
 */
 struct DGChoMuon{
-    string maDG;        // Truy xuất từ readers.json
-    string hoTen;       // Truy xuất từ readers.json
-    string sdt;         // Truy xuất từ readers.json
-    string loaiThe;     // Truy xuất từ readers.json
-    string thoiGian;    // Truy xuất từ waitlist.json
-    int doUuTien;       // Truy xuất từ waitlist.json_Độ ưu tiên theo thời gian trong một ngày
+    string maDG;        // Truy xuat tu readers.json
+    string hoTen;       // Truy xuat tu readers.json
+    string sdt;         // Truy xuat tu readers.json
+    string loaiThe;     // Truy xuat tu readers.json
+    string thoiGian;    // Truy xuat tu waitlist.json
+    int doUuTien;       // Truy xuat tu waitlist.json_Do uu tien theo thoi gian trong mot ngay
 
     int doUuTienThe() const {
         if (loaiThe == "VIP") return 1;
