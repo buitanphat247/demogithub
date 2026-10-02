@@ -54,7 +54,7 @@ PriorityQueue layDanhSachChoTheoMaTL(const string& maTL,
 // 2. HÀM MAIN CHẠY TEST
 // =================================================================
 int main() {
-    cout << "=== TEST TÍNH NĂNG WAITLIST (ĐỘC LẬP) ===" << endl << endl;
+    cout << "=== TEST ===" << endl << endl;
 
     // Dữ liệu giả lập 1: Độc giả (tương đương readers.json)
     vector<DocGia> dsDocGia = {
