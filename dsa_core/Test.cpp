@@ -73,13 +73,13 @@ int main() {
     };
 
     // Thử nghiệm lọc tài liệu "TL01"
-    string maTLTest = "TL01";
+    string maTLTest = "TL51";
     cout << "--> Dang loc va sap xep cho ma sach: " << maTLTest << endl << endl;
 
     PriorityQueue q = layDanhSachChoTheoMaTL(maTLTest, dsChoMuon, dsDocGia);
 
     if (q.isEmpty()) {
-        cout << "[!] Khong tim thay du lieu!" << endl;
+        cout << "[!] Ma tai lieu "<< maTLTest << " chua co danh sach doc gia cho muon!" << endl;
     } else {
         q.hienThi(); // In danh sách đã vun đống Max-Heap
     }
