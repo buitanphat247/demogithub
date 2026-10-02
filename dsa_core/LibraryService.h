@@ -42,6 +42,7 @@ public:
 
     //Ham phu: tim doc gia theo maDG
     DocGia* LibraryService::timDocGiaTheoMa(const string& maDG);
+    
     // Lay danh sach doc gia cho muon tai lieu theo ma tai lieu
     vector<DGChoMuon> layDanhSachChoTheoMaTL(const string& maTL);
 };

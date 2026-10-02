@@ -26,7 +26,8 @@ int main() {
 
     cout << " [SAN SANG] Da nap " << dsSach.size() << " sach, "
          << dsDocGia.size() << " doc gia, "
-         << dsPhieu.size() << " phieu muon vao Core.\n";
+         << dsPhieu.size() << " phieu muon, "
+         << dsChoMuon.size() << " hang cho vao Core.\n";
     cout << "=========================================================\n";
 
     // Bước 3: Chạy vòng lặp Menu tương tác
@@ -36,6 +37,17 @@ int main() {
     cout << " [LUU DU LIEU] Luu du lieu vao tang Persistence (data/*.json)...\n";
     cout << "=========================================================\n";
 
+    bool g1 = ghiDanhSachSach(dsSach);
+    bool g2 = ghiDanhSachDocGia(dsDocGia);
+    bool g3 = ghiDanhSachPhieu(dsPhieu);
+    bool g4 = ghiDanhSachHangCho(dsChoMuon);
+
+    if (g1 && g2 && g3 && g4) {
+        cout << " [THANH CONG] Da luu toan bo du lieu an toan!\n";
+    } else {
+        cout << " [THAT BAI] Co loi xay ra trong qua trinh ghi file!\n";
+    }
+    cout << "=========================================================\n";
 
     return 0;
 }

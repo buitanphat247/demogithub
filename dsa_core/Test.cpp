@@ -33,16 +33,14 @@ PriorityQueue layDanhSachChoTheoMaTL(const string& maTL,
             const DocGia* reader = timDocGiaTheoMa(entry.maDG, dsDocGia);
 
             if (reader != nullptr) {
-                DGChoMuon node;
-                node.maDG = reader->maDG;
-                node.hoTen = reader->hoTen;
-                node.sdt = reader->sdt;
-                node.loaiThe = reader->loaiThe;
-
-                node.thoiGian = entry.thoiGian;
-                node.doUuTien = entry.doUuTien;
-
-                waitlistQueue.EnQueue(node);
+                DGChoMuon dg;
+                dg.maDG = reader->maDG;
+                dg.hoTen = reader->hoTen;
+                dg.sdt = reader->sdt;
+                dg.loaiThe = reader->loaiThe;
+                dg.thoiGian = entry.thoiGian;
+                dg.doUuTien = entry.doUuTien;
+                waitlistQueue.EnQueue(dg);
             }
         }
     }
