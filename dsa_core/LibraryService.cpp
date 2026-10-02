@@ -6,10 +6,12 @@ using namespace std;
 LibraryService::LibraryService() {}
 
 // Nap du lieu vao bo nho he thong
-void LibraryService::napDuLieu(const vector<TaiLieu>& s, const vector<DocGia>& dg, const vector<PhieuMuon>& pm) {
+void LibraryService::napDuLieu(const vector<TaiLieu>& s, const vector<DocGia>& dg,
+                    const vector<PhieuMuon>& pm, const vector<WaitlistEntry> dscm) {
     dsSach = s;
     dsDocGia = dg;
     dsPhieuMuon = pm;
+    dsChoMuon = dscm;
 }
 
 // [MC1] Tra cuu tai lieu theo ma (Linear Search)

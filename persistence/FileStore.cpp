@@ -36,6 +36,37 @@ vector<TaiLieu> docDanhSachSach(const string& duongDan) {
     return ds;
 }
 
+// Ghi danh sach sach vao file JSON
+bool ghiDanhSachSach(const string& duongDan, const vector<TaiLieu>& ds) {
+    ofstream file(duongDan);
+    if (!file.is_open()) {
+        cerr << "[!] Khong the mo file: " << duongDan << endl;
+        return false;
+    }
+
+    try {
+        json j = json::array();
+        for (const auto& tl : ds) {
+            json item;
+            item["maTL"] = tl.maTL;
+            item["tenTL"] = tl.tenTL;
+            item["tacGia"] = tl.tacGia;
+            item["theLoai"] = tl.theLoai;
+            item["namXB"] = tl.namXB;
+            item["soLuong"] = tl.soLuong;
+            item["luotMuon"] = tl.luotMuon;
+            j.push_back(item);
+        }
+        file << j.dump(4);
+        
+        file.close();
+        return true;
+    } catch (const exception& e) {
+        cerr << "[!] Loi parse JSON file " << duongDan << ": " << e.what() << endl;
+        return false;
+    }
+}
+
 // Doc danh sach doc gia tu file JSON
 vector<DocGia> docDanhSachDocGia(const string& duongDan) {
     vector<DocGia> ds;
@@ -61,6 +92,34 @@ vector<DocGia> docDanhSachDocGia(const string& duongDan) {
     }
 
     return ds;
+}
+
+// Ghi danh sach doc gia vao file JSON
+bool ghiDanhSachDocGia(const string& duongDan, const vector<DocGia>& ds) {
+    ofstream file(duongDan);
+    if (!file.is_open()) {
+        cerr << "[!] Khong the mo file: " << duongDan << endl;
+        return false;
+    }
+
+    try {
+        json j = json::array();
+        for (const auto& dg : ds) {
+            json item;
+            item["maDG"] = dg.maDG;
+            item["hoTen"] = dg.hoTen;
+            item["sdt"] = dg.sdt;
+            item["loaiThe"] = dg.loaiThe;
+            j.push_back(item);
+        }
+        file << j.dump(4);
+        
+        file.close();
+        return true;
+    } catch (const exception& e) {
+        cerr << "[!] Loi parse JSON file " << duongDan << ": " << e.what() << endl;
+        return false;
+    }
 }
 
 // Doc danh sach phieu muon tu file JSON
@@ -92,6 +151,36 @@ vector<PhieuMuon> docDanhSachPhieu(const string& duongDan) {
     return ds;
 }
 
+// Ghi danh sach phieu muon vao file JSON
+bool ghiDanhSachPhieu(const string& duongDan, const vector<PhieuMuon>& ds) {
+    ofstream file(duongDan);
+    if (!file.is_open()) {
+        cerr << "[!] Khong the mo file: " << duongDan << endl;
+        return false;
+    }
+
+    try {
+        json j = json::array();
+        for (const auto& pm : ds) {
+            json item;
+            item["maPhieu"] = pm.maPhieu;
+            item["maDG"] = pm.maDG;
+            item["maTL"] = pm.maTL;
+            item["ngayMuon"] = pm.ngayMuon;
+            item["hanTra"] = pm.hanTra;
+            item["trangThai"] = pm.trangThai;
+            j.push_back(item);
+        }
+        file << j.dump(4);
+        
+        file.close();
+        return true;
+    } catch (const exception& e) {
+        cerr << "[!] Loi parse JSON file " << duongDan << ": " << e.what() << endl;
+        return false;
+    }
+}
+
 // Doc danh sach hang cho tu file JSON
 vector<WaitlistEntry> docDanhSachHangCho(const string& duongDan) {
     vector<WaitlistEntry> ds;
@@ -117,4 +206,32 @@ vector<WaitlistEntry> docDanhSachHangCho(const string& duongDan) {
     }
 
     return ds;
+}
+
+// Ghi danh sach hang cho vao file JSON
+bool ghiDanhSachHangCho(const string& duongDan, const vector<WaitlistEntry>& ds) {
+    ofstream file(duongDan);
+    if (!file.is_open()) {
+        cerr << "[!] Khong the mo file: " << duongDan << endl;
+        return false;
+    }
+
+    try {
+        json j = json::array();
+        for (const auto& entry : ds) {
+            json item;
+            item["maTL"] = entry.maTL;
+            item["maDG"] = entry.maDG;
+            item["doUuTien"] = entry.doUuTien;
+            item["thoiGian"] = entry.thoiGian;
+            j.push_back(item);
+        }
+        file << j.dump(4);
+        
+        file.close();
+        return true;
+    } catch (const exception& e) {
+        cerr << "[!] Loi parse JSON file " << duongDan << ": " << e.what() << endl;
+        return false;
+    }
 }
