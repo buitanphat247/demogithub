@@ -57,3 +57,28 @@ public:
         }
     }
 };
+//RQ2 CÂY CÂN BẰNG AVL
+struct PhieuMuon {
+    string maPhieu;
+    string maDocGia;
+    string maTaiLieu;
+    string hanTra; 
+};
+
+struct NodeAVL {
+    PhieuMuon data;
+    NodeAVL* trai = nullptr;
+    NodeAVL* phai = nullptr;
+    int chieuCao = 1;
+    NodeAVL(PhieuMuon pm) : data(pm) {}
+};
+
+class CayAVL {
+private:
+    NodeAVL* goc = nullptr;
+    int layChieuCao(NodeAVL* node) {
+        return node ? node->chieuCao : 0;
+    }
+    int layDoChenhLech(NodeAVL* node) {
+        return node ? layChieuCao(node->trai) - layChieuCao(node->phai) : 0;
+    }
