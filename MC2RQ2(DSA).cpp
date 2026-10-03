@@ -163,3 +163,38 @@ public:
         inQuaHan(goc, ngayHienTai);
     }
 };
+//MAIN
+
+int main() {
+    // DEMO MC2 
+    cout << "MAX-HEAP TIM TOP 1 MUON NHIEU NHAT\n";
+    MaxHeap heap;
+    heap.capNhatLuotMuon("TL001", 10);
+    heap.capNhatLuotMuon("TL002", 25);
+    heap.capNhatLuotMuon("TL003", 15);
+    heap.inTop1();
+
+    cout << "\n[Cap nhat] Sach TL001 duoc muon them, tang len 30 luot\n";
+    heap.capNhatLuotMuon("TL001", 30);
+    heap.inTop1();
+
+    // DEMO RQ2 (CAY AVL)
+    cout << "\n";
+    cout << "CAY AVL PHIEU MUON & QUA HAN)\n";
+    CayAVL cay;
+
+    PhieuMuon pm1 = { "PM01", "DG01", "TL001", "2026-09-20" };
+    PhieuMuon pm2 = { "PM02", "DG02", "TL002", "2026-09-28" };
+    PhieuMuon pm3 = { "PM03", "DG03", "TL003", "2026-10-05" };
+    PhieuMuon pm4 = { "PM04", "DG04", "TL004", "2026-09-15" };
+
+    cay.them(pm1);
+    cay.them(pm2);
+    cay.them(pm3);
+    cay.them(pm4);
+
+    cay.inDanhSachDangMuon();
+    cay.inDanhSachQuaHan("2026-09-30");
+
+    return 0;
+}
