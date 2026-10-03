@@ -82,3 +82,49 @@ private:
     int layDoChenhLech(NodeAVL* node) {
         return node ? layChieuCao(node->trai) - layChieuCao(node->phai) : 0;
     }
+    NodeAVL* xoayPhai(NodeAVL* y) {
+        NodeAVL* x = y->trai;
+        NodeAVL* T2 = x->phai;
+        x->phai = y;
+        y->trai = T2;
+        y->chieuCao = max(layChieuCao(y->trai), layChieuCao(y->phai)) + 1;
+        x->chieuCao = max(layChieuCao(x->trai), layChieuCao(x->phai)) + 1;
+        return x;
+    }
+    NodeAVL* xoayTrai(NodeAVL* x) {
+        NodeAVL* y = x->phai;
+        NodeAVL* T2 = y->trai;
+        y->trai = x;
+        x->phai = T2;
+        x->chieuCao = max(layChieuCao(x->trai), layChieuCao(x->phai)) + 1;
+        y->chieuCao = max(layChieuCao(y->trai), layChieuCao(y->phai)) + 1;
+        return y;
+    }
+    NodeAVL* themPhieu(NodeAVL* node, PhieuMuon pm) {
+        if (!node) return new NodeAVL(pm);
+
+        if (pm.hanTra < node->data.hanTra) {
+            node->trai = themPhieu(node->trai, pm);
+        }
+        else {
+            node->phai = themPhieu(node->phai, pm);
+        }
+        node->chieuCao = 1 + max(layChieuCao(node->trai), layChieuCao(node->phai));
+        int doChenh = layDoChenhLech(node);
+
+        // Xoay cân bằng cây AVL
+        if (doChenh > 1 && pm.hanTra < node->trai->data.hanTra)
+            return xoayPhai(node);
+        if (doChenh < -1 && pm.hanTra >= node->phai->data.hanTra)
+            return xoayTrai(node);
+        if (doChenh > 1 && pm.hanTra >= node->trai->data.hanTra) {
+            node->trai = xoayTrai(node->trai);
+            return xoayPhai(node);
+        }
+        if (doChenh < -1 && pm.hanTra < node->phai->data.hanTra) {
+            node->phai = xoayPhai(node->phai);
+            return xoayTrai(node);
+        }
+
+        return node;
+    }
