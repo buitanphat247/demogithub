@@ -79,7 +79,7 @@ void PriorityQueue::heapifyUp(int idx) {
 void PriorityQueue::heapifyDown(int idx) {
     while (true) {
         int left = 2 * idx + 1;
-        int right = 2 * idx + 1;
+        int right = 2 * idx + 2;
         int cha = idx;
 
         if (left < size && uuTienHon(hangCho[left], hangCho[cha])) {

@@ -9,7 +9,7 @@ using namespace std;
 struct WaitlistEntry {
     string maTL;       // Ma tai lieu dang cho
     string maDG;       // Ma doc gia dang cho
-    int doUuTien;      // Muc do uu tien (so cang lon uu tien cang cao)
+    int doUuTien;      // Muc do uu tien (so cang nho uu tien cang cao)
     string thoiGian;   // Thoi diem vao hang cho (YYYY-MM-DD HH:MM:SS)
 };
 

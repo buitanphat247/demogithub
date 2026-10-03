@@ -26,7 +26,7 @@ const DocGia* timDocGiaTheoMa(const string& maDG, const vector<DocGia>& dsDocGia
 PriorityQueue layDanhSachChoTheoMaTL(const string& maTL, 
                                      const vector<WaitlistEntry>& dsChoMuon, 
                                      const vector<DocGia>& dsDocGia) {
-    PriorityQueue waitlistQueue;
+    PriorityQueue hangCho;
 
     for (const auto& entry : dsChoMuon) {
         if (entry.maTL == maTL) {
@@ -40,12 +40,12 @@ PriorityQueue layDanhSachChoTheoMaTL(const string& maTL,
                 dg.loaiThe = reader->loaiThe;
                 dg.thoiGian = entry.thoiGian;
                 dg.doUuTien = entry.doUuTien;
-                waitlistQueue.EnQueue(dg);
+                hangCho.EnQueue(dg);
             }
         }
     }
 
-    return waitlistQueue;
+    return hangCho;
 }
 
 // =================================================================
@@ -56,22 +56,22 @@ int main() {
 
     // Dữ liệu giả lập 1: Độc giả (tương đương readers.json)
     vector<DocGia> dsDocGia = {
-        {"DG01", "Nguyen Van A", "0901234567", "Normal"},
+        {"DG01", "Nguyen Van A", "0901234567", "VIP"},
         {"DG02", "Tran Thi B",   "0912345678", "VIP"},
-        {"DG03", "Le Van C",     "0923456789", "Student"},
+        {"DG03", "Le Van C",     "0923456789", "VIP"},
         {"DG04", "Pham Van D",   "0934567890", "VIP"}
     };
 
     // Dữ liệu giả lập 2: Hàng chờ (tương đương waitlist.json)
     vector<WaitlistEntry> dsChoMuon = {
-        {"TL01", "DG01", 3, "2026-09-15 08:00:00"}, // Normal - đăng ký trước
-        {"TL01", "DG02", 1, "2026-09-15 09:00:00"}, // VIP - đăng ký sau DG01
-        {"TL02", "DG03", 2, "2026-09-15 08:30:00"}, // Sách TL02 khác
-        {"TL01", "DG04", 1, "2026-09-15 10:00:00"}  // VIP - đăng ký sau DG02
+        {"TL01", "DG01", 1, "2026-09-08 09:00:00"}, 
+        {"TL01", "DG02", 1, "2026-09-07 09:00:00"},
+        {"TL01", "DG03", 1, "2026-09-06 08:30:00"},
+        {"TL01", "DG04", 1, "2026-09-05 10:00:00"}
     };
 
-    // Thử nghiệm lọc tài liệu "TL01"
-    string maTLTest = "TL51";
+    // Thử nghiệm lọc tài liệu 
+    string maTLTest = "TL01";
     cout << "--> Dang loc va sap xep cho ma sach: " << maTLTest << endl << endl;
 
     PriorityQueue q = layDanhSachChoTheoMaTL(maTLTest, dsChoMuon, dsDocGia);
