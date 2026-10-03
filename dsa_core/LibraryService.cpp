@@ -108,7 +108,7 @@ DocGia* LibraryService::timDocGiaTheoMa(const string& maDG) {
     return nullptr;
 }
 
-// Hàm so sánh tiêu chí ưu tiên theo thuật toán thông thường
+// So sanh thu tu uu tien cua hai doc gia
 static bool soSanhUuTien(const DGChoMuon& dg1, const DGChoMuon& dg2) {
     int loaiThe1 = dg1.doUuTienThe();
     int loaiThe2 = dg2.doUuTienThe();
@@ -124,8 +124,36 @@ static bool soSanhUuTien(const DGChoMuon& dg1, const DGChoMuon& dg2) {
     return ngay1 < ngay2;
 }
 
+// Chuan hoa thoi gian ve dinh dang YYYY-MM-DD
+static string chuanHoaThgian(const string& thgian) {
+
+    if (thgian.empty()) {
+        return "9999-99-99 23:59:59";
+    }
+    string s = thgian;
+    // Sai dinh dang "-" ("/") 
+    for (char& c : s) {
+        if (c == '/') c = '-';
+    }
+
+    // Dinh dang nguoc DD-MM-YYYY
+    if (s.length() >= 10 && s[2] == '-' && s[5] == '-') {
+        string ngay = s.substr(0, 2);
+        string thang = s.substr(3, 2);
+        string nam = s.substr(6, 4);
+        string timePart = "";
+        if (s[10] == ' ') {
+            timePart = " " + s.substr(11);
+        } else {
+            timePart = s.substr(10);
+        }
+        return nam + "-" + thang + "-" + ngay + timePart;
+    }
+    return s;
+}
+
 // Lay danh sach doc gia cho muon tai lieu theo ma tai lieu
-vector<DGChoMuon> LibraryService::layDanhSachChoTheoMaTL(const string& maTL) {
+vector<DGChoMuon> LibraryService::layDanhSachChoTheoMaTL_Thuong(const string& maTL) {
     vector<DGChoMuon> ketQua;
 
     // Duyet tuyen tinh loc danh sach va lay du lieu tu dsDocGia
@@ -138,9 +166,15 @@ vector<DGChoMuon> LibraryService::layDanhSachChoTheoMaTL(const string& maTL) {
                 dg.maDG = reader->maDG;
                 dg.hoTen = reader->hoTen;
                 dg.sdt = reader->sdt;
-                dg.loaiThe = reader->loaiThe;
-                dg.thoiGian = entry.thoiGian;
-                dg.doUuTien = entry.doUuTien;
+                dg.thoiGian = chuanHoaThgian(entry.thoiGian);
+                if (dg.thoiGian == "9999-99-99 23:59:59") {
+                    dg.doUuTien = 9999;
+                    dg.loaiThe = "Normal";
+                }
+                else {
+                    dg.doUuTien = entry.doUuTien;
+                    dg.loaiThe = reader->loaiThe;
+                }
                 ketQua.push_back(dg);
             }
         }
@@ -160,4 +194,35 @@ vector<DGChoMuon> LibraryService::layDanhSachChoTheoMaTL(const string& maTL) {
     }
 
     return ketQua;
+}
+
+PriorityQueue LibraryService::layDanhSachChoTheoMaTL(const string& maTL, 
+                                     const vector<WaitlistEntry>& dsChoMuon, 
+                                     const vector<DocGia>& dsDocGia) {
+    PriorityQueue hangCho;
+
+    for (const auto& entry : dsChoMuon) {
+        if (entry.maTL == maTL) {
+            DocGia* reader = timDocGiaTheoMa(entry.maDG);
+
+            if (reader != nullptr) {
+                DGChoMuon dg;
+                dg.maDG = reader->maDG;
+                dg.hoTen = reader->hoTen;
+                dg.sdt = reader->sdt;
+                dg.thoiGian = chuanHoaThgian(entry.thoiGian);
+                if (dg.thoiGian == "9999-99-99 23:59:59") {
+                    dg.doUuTien = 9999;
+                    dg.loaiThe = "Normal";
+                }
+                else {
+                    dg.doUuTien = entry.doUuTien;
+                    dg.loaiThe = reader->loaiThe;
+                }
+                hangCho.EnQueue(dg);
+            }
+        }
+    }
+
+    return hangCho;
 }

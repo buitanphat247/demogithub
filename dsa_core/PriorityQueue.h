@@ -36,7 +36,6 @@ private:
     bool uuTienHon(const DGChoMuon& dg1, const DGChoMuon& dg2) const;
     void heapifyUp(int idx);
     void heapifyDown(int idx);
-
 public:
     PriorityQueue(int first_capacity = 300000);
     PriorityQueue(const PriorityQueue& tmp);

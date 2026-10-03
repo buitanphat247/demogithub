@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <cctype>
 using namespace std;
 
 PriorityQueue::PriorityQueue(int first_capacity) {
@@ -100,7 +101,7 @@ void PriorityQueue::heapifyDown(int idx) {
     }
 }
 
-// Thêm 1 độc giả vào hàng đợi
+// Them 1 doc gia vao hang doi
 void PriorityQueue::EnQueue(DGChoMuon &dg) {
     if (size == capacity) {
         resize();

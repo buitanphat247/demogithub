@@ -43,8 +43,9 @@ public:
     //Ham phu: tim doc gia theo maDG
     DocGia* timDocGiaTheoMa(const string& maDG);
     
-    // Lay danh sach doc gia cho muon tai lieu theo ma tai lieu
-    vector<DGChoMuon> layDanhSachChoTheoMaTL(const string& maTL);
+    // Lay danh sach doc gia cho muon tai lieu theo ma tai lieu (Thuat toan thuong_toi uu)
+    vector<DGChoMuon> layDanhSachChoTheoMaTL_Thuong(const string& maTL);
+    PriorityQueue layDanhSachChoTheoMaTL(const string& maTL, const vector<WaitlistEntry>& dsChoMuon, const vector<DocGia>& dsDocGia);
 };
 
 #endif // LIBRARYSERVICE_H
