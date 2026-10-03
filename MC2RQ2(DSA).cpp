@@ -128,3 +128,38 @@ private:
 
         return node;
     }
+     void duyetInOrder(NodeAVL* node) {
+        if (node) {
+            duyetInOrder(node->trai);
+            cout << " Ma PM: " << node->data.maPhieu
+                << " Doc gia: " << node->data.maDocGia
+                << " Han tra: " << node->data.hanTra << endl;
+            duyetInOrder(node->phai);
+        }
+    }
+    void inQuaHan(NodeAVL* node, string ngayHienTai) {
+        if (!node) return;
+        inQuaHan(node->trai, ngayHienTai);
+        if (node->data.hanTra < ngayHienTai) {
+            cout << " QUA HAN: " << node->data.maPhieu
+                << " Doc gia: " << node->data.maDocGia
+                << " Han tra: " << node->data.hanTra << endl;
+            inQuaHan(node->phai, ngayHienTai);
+        }
+    }
+
+public:
+    void them(PhieuMuon pm) {
+        goc = themPhieu(goc, pm);
+    }
+
+    void inDanhSachDangMuon() {
+        cout << " DANH SACH PHIEU DANG MUON (XEP THEO HAN TRA) \n";
+        duyetInOrder(goc);
+    }
+
+    void inDanhSachQuaHan(string ngayHienTai) {
+        cout << " DANH SACH PHIEU QUA HAN TINH DEN NGAY " << ngayHienTai << " \n";
+        inQuaHan(goc, ngayHienTai);
+    }
+};
