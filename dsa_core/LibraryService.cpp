@@ -99,29 +99,33 @@ vector<TaiLieu> LibraryService::layTatCaSach() const {
 }
 
 // Ham phu tim doc gia theo maDG
+void LibraryService::napDanhSachDocGia(const vector<DocGia>& dsDocGia) {
+    dgMap.clear();
+    for (const auto& dg : dsDocGia) {
+        dgMap[dg.maDG] = dg;
+    }
+}
 DocGia* LibraryService::timDocGiaTheoMa(const string& maDG) {
-    for (size_t i = 0; i < dsDocGia.size(); i++) {
-        if (dsDocGia[i].maDG == maDG) {
-            return &dsDocGia[i];
-        }
+    if (dgMap.count(maDG) > 0) { 
+        return &dgMap[maDG];
     }
     return nullptr;
 }
 
 // So sanh thu tu uu tien cua hai doc gia
 static bool soSanhUuTien(const DGChoMuon& dg1, const DGChoMuon& dg2) {
-    int loaiThe1 = dg1.doUuTienThe();
-    int loaiThe2 = dg2.doUuTienThe();
-    if (loaiThe1 != loaiThe2) {
-        return loaiThe1 < loaiThe2;
+    int loaiThe_dg1 = dg1.doUuTienThe();
+    int loaiThe_dg2 = dg2.doUuTienThe();
+    if (loaiThe_dg1 != loaiThe_dg2) {
+        return loaiThe_dg1 < loaiThe_dg2;
     }
 
-    string ngay1 = dg1.thoiGian.substr(0, 10);
-    string ngay2 = dg2.thoiGian.substr(0, 10);
-    if (ngay1 == ngay2) {
+    string ngaydk_dg1 = dg1.thoiGian.substr(0, 10);
+    string ngaydk_dg2 = dg2.thoiGian.substr(0, 10);
+    if (ngaydk_dg1 == ngaydk_dg2) {
         return dg1.doUuTien < dg2.doUuTien;
     }
-    return ngay1 < ngay2;
+    return ngaydk_dg1 < ngaydk_dg2;
 }
 
 // Chuan hoa thoi gian ve dinh dang YYYY-MM-DD
@@ -152,11 +156,10 @@ static string chuanHoaThgian(const string& thgian) {
     return s;
 }
 
-// Lay danh sach doc gia cho muon tai lieu theo ma tai lieu
-vector<DGChoMuon> LibraryService::layDanhSachChoTheoMaTL_Thuong(const string& maTL) {
+vector<DGChoMuon> LibraryService::locDuLieu(const string& maTL, const vector<WaitlistEntry>& dsChoMuon, 
+                                     const vector<DocGia>& dsDocGia) {
+    napDanhSachDocGia(dsDocGia);
     vector<DGChoMuon> ketQua;
-
-    // Duyet tuyen tinh loc danh sach va lay du lieu tu dsDocGia
     for (const auto& entry : dsChoMuon) {
         if (entry.maTL == maTL) {
             const DocGia* reader = timDocGiaTheoMa(entry.maDG);
@@ -179,7 +182,12 @@ vector<DGChoMuon> LibraryService::layDanhSachChoTheoMaTL_Thuong(const string& ma
             }
         }
     }
+    return ketQua;
+}
 
+// Lay danh sach doc gia cho muon tai lieu theo ma tai lieu
+vector<DGChoMuon> LibraryService::layDanhSachChoTheoMaTL_Thuong(const string& maTL, const vector<WaitlistEntry>& dsChoMuon, const vector<DocGia>& dsDocGia) {
+    vector<DGChoMuon> ketQua = locDuLieu(maTL, dsChoMuon, dsDocGia);
     // Sap xep ket qua bang Selection Sort 
     for (size_t i = 0; i < ketQua.size(); i++) {
         size_t minIdx = i;
@@ -196,32 +204,12 @@ vector<DGChoMuon> LibraryService::layDanhSachChoTheoMaTL_Thuong(const string& ma
     return ketQua;
 }
 
-PriorityQueue LibraryService::layDanhSachChoTheoMaTL(const string& maTL, 
-                                     const vector<WaitlistEntry>& dsChoMuon, 
-                                     const vector<DocGia>& dsDocGia) {
-    PriorityQueue hangCho;
-
-    for (const auto& entry : dsChoMuon) {
-        if (entry.maTL == maTL) {
-            DocGia* reader = timDocGiaTheoMa(entry.maDG);
-
-            if (reader != nullptr) {
-                DGChoMuon dg;
-                dg.maDG = reader->maDG;
-                dg.hoTen = reader->hoTen;
-                dg.sdt = reader->sdt;
-                dg.thoiGian = chuanHoaThgian(entry.thoiGian);
-                if (dg.thoiGian == "9999-99-99 23:59:59") {
-                    dg.doUuTien = 9999;
-                    dg.loaiThe = "Normal";
-                }
-                else {
-                    dg.doUuTien = entry.doUuTien;
-                    dg.loaiThe = reader->loaiThe;
-                }
-                hangCho.EnQueue(dg);
-            }
-        }
+PriorityQueue LibraryService::layDanhSachChoTheoMaTL(const string& maTL, const vector<WaitlistEntry>& dsChoMuon, const vector<DocGia>& dsDocGia) {
+    vector<DGChoMuon> hangdoi = locDuLieu(maTL, dsChoMuon, dsDocGia);
+    PriorityQueue hangCho(hangdoi.size() > 0 ? hangdoi.size() : 1);
+    
+    for (const auto& u : hangdoi) {
+        hangCho.EnQueue(u);
     }
 
     return hangCho;

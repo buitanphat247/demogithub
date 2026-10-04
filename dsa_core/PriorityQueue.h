@@ -41,7 +41,7 @@ public:
     PriorityQueue(const PriorityQueue& tmp);
     ~PriorityQueue();
 
-    void EnQueue(DGChoMuon &dg);
+    void EnQueue(const DGChoMuon &dg);
     DGChoMuon DeQueue();
     bool isEmpty() const;
     int getSize();

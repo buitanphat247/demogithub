@@ -6,35 +6,28 @@
 #include "../models/Models.h"
 #include "PriorityQueue.h"
 #include "LibraryService.h"
+#include "../persistence/FileStore.h"
 
 using namespace std;
 
 int main() {
     cout << "=== TEST ===" << endl << endl;
     
-    vector<TaiLieu> dsSach = {{"TL01", "Giai Tich 1", "Nguyen Van A", "Toan", 2023, 0, 50}};
+    vector<TaiLieu> dsSach = {};
     
-    vector<DocGia> dsDocGia = {
-        {"DG01", "Nguyen Van A", "0901234567", "VIP"},
-        {"DG02", "Tran Thi B",   "0912345678", "VIP"},
-        {"DG03", "Le Van C",     "0923456789", "VIP"},
-        {"DG04", "Pham Van D",   "0934567890", "VIP"}
-    };
+    vector<DocGia> dsDocGia = docDanhSachDocGia();
 
     vector<PhieuMuon> dsPhieu = {};
 
-    vector<WaitlistEntry> dsChoMuon = {
-        {"TL01", "DG01", 1, "2026-09-08 08:00:00"}, 
-        {"TL01", "DG02", 1, "2026-09-07 09:00:00"},
-        {"TL01", "DG03", 1, "2026-09-06 08:30:00"},
-        {"TL01", "DG04", 1, "2026-09-05 10:00:00"}
-    };  
+    vector<WaitlistEntry> dsChoMuon = docDanhSachHangCho();  
 
     LibraryService service;
     service.napDuLieu(dsSach, dsDocGia, dsPhieu, dsChoMuon);
-    string maTLTest = "TL01";
+    cout << "DA NAP XONG\n\n";
+    string maTLTest = "TL000015";
 
-    PriorityQueue q = service.layDanhSachChoTheoMaTL(maTLTest, dsChoMuon, dsDocGia);
+    vector<DGChoMuon> h = service.locDuLieu(maTLTest, dsChoMuon, dsDocGia);
+    PriorityQueue q = service.layDanhSachChoTheoMaTL(h);
 
     if (q.isEmpty()) {
         cout << "[!] Ma tai lieu "<< maTLTest << " chua co danh sach doc gia cho muon!" << endl;

@@ -52,11 +52,9 @@ bool PriorityQueue::uuTienHon(const DGChoMuon& dg1, const DGChoMuon& dg2) const 
         string ngaydk_dg1 = dg1.thoiGian.substr(0, 10);
         string ngaydk_dg2 = dg2.thoiGian.substr(0, 10);
         if (ngaydk_dg1 == ngaydk_dg2) {
-            return (dg1.doUuTien < dg2.doUuTien);
+            return dg1.doUuTien < dg2.doUuTien;
         }
-        else {
-            return (ngaydk_dg1 < ngaydk_dg2);
-        }
+        return ngaydk_dg1 < ngaydk_dg2;
     }
 }
 
@@ -66,10 +64,7 @@ void PriorityQueue::heapifyUp(int idx) {
         int cha = (idx - 1)/2;
 
         if (uuTienHon(hangCho[idx], hangCho[cha])) {
-            DGChoMuon tmp = hangCho[idx];
-            hangCho[idx] = hangCho[cha];
-            hangCho[cha] = tmp;
-
+            swap(hangCho[idx], hangCho[cha]);
             idx = cha;
         }
         else break;
@@ -91,10 +86,7 @@ void PriorityQueue::heapifyDown(int idx) {
         }
 
         if (cha != idx) {
-            DGChoMuon tmp = hangCho[idx];
-            hangCho[idx] = hangCho[cha];
-            hangCho[cha] = tmp;
-
+            swap(hangCho[idx], hangCho[cha]);
             idx = cha;
         }
         else break;
@@ -102,7 +94,7 @@ void PriorityQueue::heapifyDown(int idx) {
 }
 
 // Them 1 doc gia vao hang doi
-void PriorityQueue::EnQueue(DGChoMuon &dg) {
+void PriorityQueue::EnQueue(const DGChoMuon &dg) {
     if (size == capacity) {
         resize();
     }
@@ -162,7 +154,7 @@ void PriorityQueue::hienThi() const {
         cout << left 
              << setw(6)  << stt++               
              << setw(12) << dg.maDG
-             << setw(20) << dg.hoTen
+             << setw(30) << dg.hoTen
              << setw(15) << dg.sdt
              << setw(12) << dg.loaiThe
              << setw(20) << dg.thoiGian << endl;

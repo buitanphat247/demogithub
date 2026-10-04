@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <unordered_map>
 #include "../models/Models.h"
 #include "PriorityQueue.h"
 
@@ -15,6 +16,7 @@ private:
     vector<DocGia> dsDocGia;        // Danh sach doc gia
     vector<PhieuMuon> dsPhieuMuon;  // Danh sach phieu muon
     vector<WaitlistEntry> dsChoMuon;// Danh sach cho muon
+    unordered_map<std::string, DocGia> dgMap;
 public:
     LibraryService();
 
@@ -41,10 +43,12 @@ public:
     vector<TaiLieu> layTatCaSach() const;
 
     //Ham phu: tim doc gia theo maDG
+    void napDanhSachDocGia(const vector<DocGia>& dsDocGia);
     DocGia* timDocGiaTheoMa(const string& maDG);
+    vector<DGChoMuon> locDuLieu(const string& maTL, const vector<WaitlistEntry>& dsChoMuon, const vector<DocGia>& dsDocGia);
     
     // Lay danh sach doc gia cho muon tai lieu theo ma tai lieu (Thuat toan thuong_toi uu)
-    vector<DGChoMuon> layDanhSachChoTheoMaTL_Thuong(const string& maTL);
+    vector<DGChoMuon> layDanhSachChoTheoMaTL_Thuong(const string& maTL, const vector<WaitlistEntry>& dsChoMuon, const vector<DocGia>& dsDocGia);
     PriorityQueue layDanhSachChoTheoMaTL(const string& maTL, const vector<WaitlistEntry>& dsChoMuon, const vector<DocGia>& dsDocGia);
 };
 
