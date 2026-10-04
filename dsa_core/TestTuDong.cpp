@@ -41,13 +41,16 @@ int main() {
     
     PriorityQueue q = service.layDanhSachChoTheoMaTL("TL01", dsChoMuon,dsDocGia);
     PriorityQueue tmp = q;
-    string kq[6];
+    string kq[6], tg[6];
     int i = 0;
     while (!tmp.isEmpty()) {
         DGChoMuon r = tmp.DeQueue();
         kq[i] = r.maDG;
+        tg[i] = r.thoiGian;
+        cout << kq[i] << " " << tg[i];
         i++;
     }
+    cout << endl;
     int tongPass = 0;
 
     cout << "== TEST TU DONG ==\n\n";
